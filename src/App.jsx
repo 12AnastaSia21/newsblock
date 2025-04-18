@@ -1,5 +1,6 @@
 import './App.sass'
 import TheNewsBlock from './components/TheNewsBlock'
+import { mockNewsData } from './data/mockNewsData'
 
 function App() {
 
@@ -7,7 +8,9 @@ function App() {
     <>
       <div className='news-background'>
         <div className='news-container'>
-          <TheNewsBlock></TheNewsBlock>
+        {mockNewsData.map(news => (
+        <TheNewsBlock key={news.ID} news={news} />
+      ))}
         </div>
       </div>
     </>
