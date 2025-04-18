@@ -130,8 +130,7 @@ export default function TheNewsBlock({ news }) {
                         </button>
                     )}
                 </div>
-                <div 
-                    className={`news-block__keywords ${showAllKeywords ? 'keywords--wrapped' : ''}`}
+                <div className={`news-block__keywords ${showAllKeywords ? 'keywords--wrapped' : ''}`}
                     ref={keywordsContainerRef}
                 >
                     {(showAllKeywords ? news.KW : news.KW.slice(0, visibleCount)).map((keyword, index) => (
@@ -158,6 +157,11 @@ export default function TheNewsBlock({ news }) {
                             Show less
                         </button>
                     )}
+                </div>
+                <div className='news-block__button-source'>
+                    <Button className='button-source__button' type="primary">
+                        <Link className='button-source__link' href={news.URL} target="_blank">Original Source</Link>
+                    </Button>
                 </div>
             </div>
         </>
