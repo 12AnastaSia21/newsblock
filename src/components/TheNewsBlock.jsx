@@ -19,7 +19,12 @@ const sentimentColor = {
 
 export default function TheNewsBlock({ news }) {
     const [selected, setSelected] = useState(false) //Состояние для кнопки выбора новости up-info-container__button-select
-    const [isExpanded, setIsExpanded] = useState(false);//Состояние для скрытия текста
+    const [isExpanded, setIsExpanded] = useState(false); //Состояние для скрытия текста
+    // Состояние для скрытия тегов, если они не помещаются на строке
+    const [showAllKeywords, setShowAllKeywords] = useState(false);
+    const [visibleCount, setVisibleCount] = useState(news.KW.length);
+    const keywordsContainerRef = useRef(null);
+
     
     const toggleIcon = () => setSelected(prev => !prev)    
     const toggleExpand = () => {
@@ -29,6 +34,26 @@ export default function TheNewsBlock({ news }) {
     const highlightedHTML = news.HIGHLIGHTS
         .join('\n')
         .replace(/<kw>(.*?)<\/kw>/g, '<span class="highlighted-keyword">$1</span>'); //Замена тегов <kw></kw> на <span></span> в мок-данных
+
+    // Хук для определения количества тегов, которые помещаются в строку, если не помещаются - отображение останавливается и появляется кнопка с кол-вом скрытых тегов
+        useEffect(() => {
+            if (!showAllKeywords && keywordsContainerRef.current) {
+              const container = keywordsContainerRef.current;
+              const containerWidth = container.offsetWidth;
+              const children = Array.from(container.children);
+              let totalWidth = 0;
+              let count = 0;
+        
+              for (let child of children) {
+                const childWidth = child.offsetWidth + 8;
+                if (totalWidth + childWidth > containerWidth) break;
+                totalWidth += childWidth;
+                count++;
+              }
+        
+              setVisibleCount(count);
+            }
+          }, [showAllKeywords, news.KW]);
     
     return (
         <>
@@ -102,6 +127,35 @@ export default function TheNewsBlock({ news }) {
                                 src={isExpanded ? upArrow : downArrow}
                                 alt=""
                             />
+                        </button>
+                    )}
+                </div>
+                <div 
+                    className={`news-block__keywords ${showAllKeywords ? 'keywords--wrapped' : ''}`}
+                    ref={keywordsContainerRef}
+                >
+                    {(showAllKeywords ? news.KW : news.KW.slice(0, visibleCount)).map((keyword, index) => (
+                        <div key={index} className='keywords__keyword-tag'>
+                            <span className='keyword-tag__value semi-transparent-text-m'>{keyword.value}</span>
+                            <span className='keyword-tag__count accent-text-m'>{keyword.count}</span>
+                        </div>
+                    ))}
+                    {/* Кнопка, показывающая теги */}
+                    {!showAllKeywords && news.KW.length > visibleCount && (
+                        <button
+                            className="keywords__show-more-button"
+                            onClick={() => setShowAllKeywords(true)}
+                        >
+                            Show all +{news.KW.length - visibleCount}
+                        </button>
+                    )}
+                    {/* Кнопка, скрывающая теги */}
+                    {showAllKeywords && news.KW.length > visibleCount && (
+                        <button
+                            className="keywords__show-more-button"
+                            onClick={() => setShowAllKeywords(false)}
+                        >
+                            Show less
                         </button>
                     )}
                 </div>
