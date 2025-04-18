@@ -224,7 +224,9 @@ export default function TheNewsBlock({ news }) {
                     </div>
                 </div>
 
-                
+                <div className='news-block__button-view'>
+                    <Button className='news-block__button-view-duplicates' type="primary" ghost><img className='news-block__button-view-icon' src={arrowDown}/>View Duplicates</Button>
+                </div>
             </div>
         </>
     )
