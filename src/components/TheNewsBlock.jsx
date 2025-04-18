@@ -5,6 +5,8 @@ import infoIcon from '../assets/InfoSquare.svg'
 import squareIcon from '../assets/Square.svg'
 import checkSquareIcon from '../assets/CheckSquare.svg'
 
+const { Text, Link } = Typography;
+
 const sentimentColor = {
     positive: 'sentiment-positive',
     negative: 'sentiment-negative',
@@ -50,6 +52,9 @@ export default function TheNewsBlock({ news }) {
                         <button className='up-info-container__button-info'><img src={infoIcon} alt=''/></button>
                         <button className='up-info-container__button-select' onClick={toggleIcon}><img src={selected ? checkSquareIcon : squareIcon} alt=''/></button>
                     </div>
+                </div>
+                <div className='news-block__headline'>
+                    <Link className='news-block__headline-link' href={news.URL} target="_blank">{news.TI}</Link>
                 </div>
             </div>
         </>

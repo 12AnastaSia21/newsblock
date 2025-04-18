@@ -1,12 +1,14 @@
 .news-block
     display: flex
+    flex-direction: column
+    justify-content: space-between
     width: 100%
     border: 1px solid #373759
     border-radius: 10px
     background: none
 
+// Стили для верхней части новостного блока
 .news-block__up-info-container
-    width: 100%
     padding: 1rem
     display: flex
     flex-direction: row
@@ -17,7 +19,6 @@
     flex-direction: row
     gap: 2rem
 
-   
 .semi-transparent-text
     margin: 0
     padding: 0
@@ -70,3 +71,13 @@
     border: none
     background: none
     cursor: pointer
+
+
+// Стили для заголовка новости
+.news-block__headline
+    padding: 0 1rem
+    display: flex
+
+.news-block__headline-link
+    font: "Special Gothic", sans-serif
+    font-size: 1.3rem
