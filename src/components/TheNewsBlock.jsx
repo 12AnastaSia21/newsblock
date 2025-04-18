@@ -8,6 +8,7 @@ import bookOpen from '../assets/BookOpen.svg'
 import userLine from '../assets/User1Line.svg'
 import downArrow from '../assets/BxsDownArrow.svg'
 import upArrow from '../assets/BxsUpArrow.svg'
+import arrowDown from '../assets/ArrowDown.svg'
 
 const { Text, Link } = Typography;
 
@@ -161,6 +162,16 @@ export default function TheNewsBlock({ news }) {
                 <div className='news-block__button-source'>
                     <Button className='button-source__button' type="primary">
                         <Link className='button-source__link' href={news.URL} target="_blank">Original Source</Link>
+                    </Button>
+                </div>
+                <div className='news-block__duplicates-and-by-relevance'>
+                    <div className='news-block__duplicates'>
+                        <span className='duplicates__text semi-transparent-text-l'>Duplicates:</span>
+                        <span className='duplicates__count accent-text-l'>192</span>
+                    </div>
+                    <Button className='news-block__by-relevance' type="text">
+                        <span className='by-relevance__text semi-transparent-text-l'>By Relevance</span>
+                        <img className='by-relevance__icon' src={arrowDown}/>
                     </Button>
                 </div>
             </div>
