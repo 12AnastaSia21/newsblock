@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './TheNewsBlock.sass'
 import { Button, Typography } from 'antd'
 import infoIcon from '../assets/InfoSquare.svg'
@@ -6,6 +6,8 @@ import squareIcon from '../assets/Square.svg'
 import checkSquareIcon from '../assets/CheckSquare.svg'
 import bookOpen from '../assets/BookOpen.svg'
 import userLine from '../assets/User1Line.svg'
+import downArrow from '../assets/BxsDownArrow.svg'
+import upArrow from '../assets/BxsUpArrow.svg'
 
 const { Text, Link } = Typography;
 
@@ -17,7 +19,16 @@ const sentimentColor = {
 
 export default function TheNewsBlock({ news }) {
     const [selected, setSelected] = useState(false) //Состояние для кнопки выбора новости up-info-container__button-select
-    const toggleIcon = () => setSelected(prev => !prev)
+    const [isExpanded, setIsExpanded] = useState(false);//Состояние для скрытия текста
+    
+    const toggleIcon = () => setSelected(prev => !prev)    
+    const toggleExpand = () => {
+      setIsExpanded((prev) => !prev);
+    };
+  
+    const highlightedHTML = news.HIGHLIGHTS
+        .join('\n')
+        .replace(/<kw>(.*?)<\/kw>/g, '<span class="highlighted-keyword">$1</span>'); //Замена тегов <kw></kw> на <span></span> в мок-данных
     
     return (
         <>
@@ -74,6 +85,25 @@ export default function TheNewsBlock({ news }) {
                         <img className='news-meta-info__author-icon news-meta-info__icon' src={userLine}/>
                         <p className='news-meta-info__author-name semi-transparent-text-m'>{news.AU}</p>
                     </div>
+                </div>
+                <div className={`news-block__main ${isExpanded ? 'expanded' : ''}`}>
+                    <p
+                        className="news-block__main-text"
+                        dangerouslySetInnerHTML={{ __html: highlightedHTML }}
+                    />
+                    {highlightedHTML.length > 400 && (
+                        <button
+                            className="news-block__main-text__show-more-button"
+                            onClick={toggleExpand}
+                        >
+                            {isExpanded ? 'Show less' : 'Show more'}
+                            <img
+                                className="button-arrow"
+                                src={isExpanded ? upArrow : downArrow}
+                                alt=""
+                            />
+                        </button>
+                    )}
                 </div>
             </div>
         </>

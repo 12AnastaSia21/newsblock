@@ -105,3 +105,54 @@
     font-family: "Special Gothic", sans-serif
     font-size: 1.1rem
     color: #6b758b
+
+//Стили для основной части
+.news-block__main
+  padding: 1rem
+  display: flex
+  flex-direction: column
+  position: relative
+
+  &.expanded
+    .news-block__main-text
+      display: block
+      -webkit-line-clamp: unset
+      max-height: none
+
+.news-block__main-text
+  margin: 0
+  font-family: "Special Gothic", sans-serif
+  font-size: 1.2rem
+  color: #cecdd4
+  white-space: pre-line
+  overflow: hidden
+  display: -webkit-box
+  -webkit-line-clamp: 3
+  -webkit-box-orient: vertical
+  max-height: 5.5em
+  transition: max-height 0.3s ease
+
+.news-block__main-text__show-more-button
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 1rem
+    padding: 0
+    background: none
+    border: none
+    color: #086ec9
+    cursor: pointer
+    align-self: flex-start
+    font-size: 1.1rem
+    &:hover
+        color: #087add
+
+.button-arrow
+    width: 10px
+
+.highlighted-keyword
+  background-color: #0772cb
+  color: #cecdd4
+  padding: 0.1rem 0.3rem
+  border-radius: 5px
+
