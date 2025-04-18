@@ -7,9 +7,9 @@ export const mockNewsData = [
       DP: "2025-03-06T21:00:00",
       DOM: "globalsecuritymag.com",
       SENT: "negative",
-      LANG: "en",
+      LANG: "En",
       AU: [],
-      FAV: "/favicons/e65d69dc71ab539384fcc63062efdd3d.png",
+      FAV: "/Newspaper.svg",
       KW: [
         { value: "antivirus", count: 10 },
         { value: "kaspersky", count: 5 },
