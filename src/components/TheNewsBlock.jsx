@@ -91,9 +91,11 @@ export default function TheNewsBlock({ news }) {
                         <button className='up-info-container__button-select' onClick={toggleIcon}><img src={selected ? checkSquareIcon : squareIcon} alt=''/></button>
                     </div>
                 </div>
+
                 <div className='news-block__headline'>
                     <Link className='news-block__headline-link' href={news.URL} target="_blank">{news.TI}</Link>
                 </div>
+
                 <div className='news-block__news-meta-info'>
                     <div className='news-meta-info__domain news-meta-info__block'>
                         <img className='news-meta-info__domain-favicon news-meta-info__icon' src={news.FAV}/>
@@ -112,6 +114,7 @@ export default function TheNewsBlock({ news }) {
                         <p className='news-meta-info__author-name semi-transparent-text-m'>{news.AU}</p>
                     </div>
                 </div>
+
                 <div className={`news-block__main ${isExpanded ? 'expanded' : ''}`}>
                     <p
                         className="news-block__main-text"
@@ -131,6 +134,7 @@ export default function TheNewsBlock({ news }) {
                         </button>
                     )}
                 </div>
+
                 <div className={`news-block__keywords ${showAllKeywords ? 'keywords--wrapped' : ''}`}
                     ref={keywordsContainerRef}
                 >
@@ -159,11 +163,13 @@ export default function TheNewsBlock({ news }) {
                         </button>
                     )}
                 </div>
+
                 <div className='news-block__button-source'>
                     <Button className='button-source__button' type="primary">
                         <Link className='button-source__link' href={news.URL} target="_blank">Original Source</Link>
                     </Button>
                 </div>
+
                 <div className='news-block__duplicates-and-by-relevance'>
                     <div className='news-block__duplicates'>
                         <span className='duplicates__text semi-transparent-text-l'>Duplicates:</span>
@@ -174,6 +180,51 @@ export default function TheNewsBlock({ news }) {
                         <img className='by-relevance__icon' src={arrowDown}/>
                     </Button>
                 </div>
+
+                <div className='news-block__duplicat'>
+                    <div className='news-block__up-info-container'>
+                        <div className='up-info-container__statistical-info'>
+                            <div className='up-info-container__date-of-publication semi-transparent-text-s'>
+                                <span className='up-info-container__date-of-publication accent-text-s'>
+                                    {new Date(news.DP).toLocaleString('en-GB', { day: '2-digit' })}
+                                </span>{' '}
+                                {new Date(news.DP).toLocaleString('en-GB', {
+                                    month: 'short',
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    hour12: false,}).replace(',', '')
+                                }
+                            </div>
+                            <div className='up-info-container__reach semi-transparent-text-s'><span className='accent-text'>{news.REACH}</span> Reach</div>
+                        </div>
+                        <div className='up-info-container__statistical-button'>
+                            <button className='up-info-container__button-info'><img src={infoIcon} alt=''/></button>
+                            <button className='up-info-container__button-select' onClick={toggleIcon}><img src={selected ? checkSquareIcon : squareIcon} alt=''/></button>
+                        </div>
+                    </div>
+
+                    <div className='news-block__headline'>
+                        <Link className='news-block__headline-link' href={news.URL} target="_blank">{news.TI}</Link>
+                    </div>
+
+                    <div className='news-block__news-meta-info'>
+                        <div className='news-meta-info__domain news-meta-info__block'>
+                            <img className='news-meta-info__domain-favicon news-meta-info__icon' src={news.FAV}/>
+                            <Link className='news-meta-info__domain-link semi-transparent-text-m'><u>{news.DOM}</u></Link>
+                        </div>
+                        <div className='news-meta-info__country news-meta-info__block'>
+                            <img className='news-meta-info__country-flag news-meta-info__icon' src={`https://flagcdn.com/w40/${news.CNTR_CODE.toLowerCase()}.png`} alt={news.CNTR_CODE}/>
+                            <p className='news-meta-info__country-name semi-transparent-text-m'>{news.CNTR}</p>
+                        </div>
+                        <div className='news-meta-info__author news-meta-info__block'>
+                            <img className='news-meta-info__author-icon news-meta-info__icon' src={userLine}/>
+                            <p className='news-meta-info__author-name semi-transparent-text-m'>{news.AU}</p>
+                        </div>
+                    </div>
+                </div>
+
+                
             </div>
         </>
     )
