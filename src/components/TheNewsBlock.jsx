@@ -10,7 +10,7 @@ import downArrow from '../assets/BxsDownArrow.svg'
 import upArrow from '../assets/BxsUpArrow.svg'
 import arrowDown from '../assets/ArrowDown.svg'
 
-const { Text, Link } = Typography;
+const { Link } = Typography;
 
 const sentimentColor = {
     positive: 'sentiment-positive',
